@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Checkpoint012SemDigitalApplication {
+public class Nac012SemDigital {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Checkpoint012SemDigitalApplication.class, args);
+		SpringApplication.run(Nac012SemDigital.class, args);
 	}
 
 }
