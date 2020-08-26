@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 public class Hospital {
 
 	//Arrumar o tamanho das strings com Size
+	//Colocar as anotações de colunas com o nome da modelagem. Igual o cnpj
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hospitalSequence")
