@@ -9,9 +9,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -33,6 +35,7 @@ public class HospitalResource {
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<HospitalDTO> listar(String nome) {
 		//List<Hospital> hospitais = nome == null ? hospitalRepository.findAll() : hospitalRepository.findByNomeContaining(nome);
+		//acho mais fácil a leitura desse jeito, mas é a mesma coisa da linha de cima
 		List<Hospital> hospitais = null;
 		
 		if (nome == null) {
@@ -59,6 +62,35 @@ public class HospitalResource {
 		URI uri = uriBuilder.path("/hospital/{id}").buildAndExpand(hospital.getCodigo()).toUri();
 		
 		return ResponseEntity.created(uri).body(new HospitalDTO(hospital));
+	}
+	
+	//Testar
+	@PutMapping("{id}")
+	@Transactional
+	public ResponseEntity<HospitalDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody Hospital hospitalNovo){
+		Optional<Hospital> hospital = hospitalRepository.findById(codigo);
+		
+		return hospital.map(h -> {
+			h.setCnpj(hospitalNovo.getCnpj());
+			h.setEndereco(hospitalNovo.getEndereco());
+			h.setInscricaoEstadual(hospitalNovo.getInscricaoEstadual());
+			h.setNome(hospitalNovo.getNome());
+			h.setTelefone(hospitalNovo.getTelefone());
+			hospitalRepository.save(h);
+			return ResponseEntity.ok(new HospitalDTO(h));
+		}).orElse(ResponseEntity.notFound().build());
+		
+	}
+	
+	//Testar
+	@DeleteMapping("{id}")
+	@Transactional
+	public ResponseEntity<?> apagar(@PathVariable("id") Long codigo){
+		Optional<Hospital> hospital = hospitalRepository.findById(codigo);
+		return hospital.map(h -> {
+			hospitalRepository.deleteById(codigo);
+			return ResponseEntity.ok().build();
+		}).orElse(ResponseEntity.notFound().build());
 	}
 	
 }
