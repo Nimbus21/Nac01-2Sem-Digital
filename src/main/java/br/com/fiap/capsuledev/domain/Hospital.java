@@ -6,27 +6,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table (name = "TB_HOSPITAL_CLINICA")
 @SequenceGenerator(name = "hospitalSequence", sequenceName = "SQ_HOSPITAL", allocationSize = 1)
 public class Hospital {
 
 	//Arrumar o tamanho das strings com Size
-	//Colocar as anotações de colunas com o nome da modelagem. Igual o cnpj
 	
 	@Id
+	@Column(name = "cd_hospital_clinica")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hospitalSequence")
 	private Long codigo;
 	
+	@Column(name = "nm_hospital_clinica")
 	private String nome;
 	
 	@Column(name = "nr_cnpj")
 	private String cnpj;
 	
+	@Column(name = "nr_inscricao_estadual")
 	private String inscricaoEstadual;
 	
+	@Column(name = "ds_endereco")
 	private String endereco;
 	
+	@Column(name = "nr_telefone")
 	private String telefone;
 
 	public Hospital() {
