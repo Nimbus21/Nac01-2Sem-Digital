@@ -8,8 +8,7 @@ import br.com.fiap.capsuledev.domain.Monitoramento;
 
 public class HospitalDTO {
 
-private Long codigo;
-	
+	private Long codigo;
 	private String nome;	
 	private String cnpj;
 	private String inscricaoEstadual;
