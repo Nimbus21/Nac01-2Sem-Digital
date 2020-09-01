@@ -1,9 +1,7 @@
 package br.com.fiap.capsuledev.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -12,6 +10,10 @@ import java.util.Date;
 public class CapsuleControl {
 
     @Id
+    @Column(name = "cd_capsule_control")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "capsuleControlSequence")
+    private Long codigo;
+    
     @Column(name = "ds_remedio")
     private String remedio;
 
@@ -22,16 +24,29 @@ public class CapsuleControl {
     private Date data;
 
     @Column(name = "hr_alarme")
-    private DateTimeFormat horaAlarme;
+    private Date horaAlarme;
+    
+    @ManyToOne
+    @JoinColumn(name = "cd_monitoramento", nullable = false)
+    private Monitoramento monitoramento;
 
-    public CapsuleControl(String remedio, String dose, Date data, DateTimeFormat horaAlarme) {
+    public CapsuleControl(String remedio, String dose, Date data, Date horaAlarme) {
         this.remedio = remedio;
         this.dose = dose;
         this.data = data;
         this.horaAlarme = horaAlarme;
     }
+    
 
-    public String getRemedio() {
+    public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getRemedio() {
         return remedio;
     }
 
@@ -55,11 +70,21 @@ public class CapsuleControl {
         this.data = data;
     }
 
-    public DateTimeFormat getHoraAlarme() {
+    public Date getHoraAlarme() {
         return horaAlarme;
     }
 
-    public void setHoraAlarme(DateTimeFormat horaAlarme) {
+    public void setHoraAlarme(Date horaAlarme) {
         this.horaAlarme = horaAlarme;
     }
+
+
+	public Monitoramento getMonitoramento() {
+		return monitoramento;
+	}
+
+	public void setMonitoramento(Monitoramento monitoramento) {
+		this.monitoramento = monitoramento;
+	}
+    
 }

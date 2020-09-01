@@ -1,33 +1,49 @@
 package br.com.fiap.capsuledev.domain;
 
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_MEDICO")
 @SequenceGenerator(name = "MedicoSequence", sequenceName = "SQ_MEDICO", allocationSize = 1)
 public class Medico {
+	
     @Id
     @Column(name = "cd_medico")
-    private Long medico;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MedicoSequence")
+    private Long codigo;
 
     @Column(name = "nm_medico")
     private String nome;
 
     @Column(name = "nr_crm")
-    private char crm;
+    private String crm;
+    
+    @OneToMany(mappedBy="medico", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
 
-    public Medico(Long medico, String nome, char crm) {
-        this.medico = medico;
+    public Medico(String nome, String crm) {
         this.nome = nome;
         this.crm = crm;
     }
 
-    public Long getMedico() {
-        return medico;
+    public Long getCodigo() {
+        return codigo;
     }
 
-    public void setMedico(Long medico) {
-        this.medico = medico;
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -38,11 +54,24 @@ public class Medico {
         this.nome = nome;
     }
 
-    public char getCrm() {
+    public String getCrm() {
         return crm;
     }
 
-    public void setCrm(char crm) {
+    public void setCrm(String crm) {
         this.crm = crm;
     }
+
+	public List<Monitoramento> getMonitoramentos() {
+		return monitoramentos;
+	}
+
+	public void setMonitoramentos(List<Monitoramento> monitoramentos) {
+		this.monitoramentos = monitoramentos;
+	}
+    
+	public void addMonitoramentos(Monitoramento monitoramento) {
+		monitoramento.setMedico(this);
+		monitoramentos.add(monitoramento);
+	}
 }

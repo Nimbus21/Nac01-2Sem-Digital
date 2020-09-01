@@ -1,20 +1,25 @@
 package br.com.fiap.capsuledev.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import  javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 
 @Entity
 @Table (name = "TB_HOSPITAL_CLINICA")
 @SequenceGenerator(name = "hospitalSequence", sequenceName = "SQ_HOSPITAL", allocationSize = 1)
 public class Hospital {
 
-	//Arrumar o tamanho das strings com Size
-	
 	@Id
 	@Column(name = "cd_hospital_clinica")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hospitalSequence")
@@ -34,13 +39,15 @@ public class Hospital {
 	
 	@Column(name = "nr_telefone")
 	private String telefone;
+	
+	@OneToMany(mappedBy="hospital", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+	private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
 
 	public Hospital() {
 	
 	}
 
 	public Hospital(String nome, String cnpj, String inscricaoEstadual, String endereco, String telefone) {
-		super();
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.inscricaoEstadual = inscricaoEstadual;
@@ -94,6 +101,19 @@ public class Hospital {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public List<Monitoramento> getMonitoramentos() {
+		return monitoramentos;
+	}
+
+	public void setMonitoramentos(List<Monitoramento> monitoramentos) {
+		this.monitoramentos = monitoramentos;
+	}
+	
+	public void addMonitoramentos(Monitoramento monitoramento) {
+		monitoramento.setHospital(this);
+		monitoramentos.add(monitoramento);
 	}
 	
 }

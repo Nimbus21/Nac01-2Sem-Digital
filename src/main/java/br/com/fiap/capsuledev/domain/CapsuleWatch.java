@@ -10,7 +10,8 @@ public class CapsuleWatch {
 
     @Id
     @Column(name ="cd_capsule_watch")
-    private Long capsuleWatch;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "capsuleWatchSequence")
+    private Long codigo;
 
     @Column(name = "nr_batimento")
     private int batimentos;
@@ -19,7 +20,7 @@ public class CapsuleWatch {
     private Float temperatura;
 
     @Column(name = "nr_pressao")
-    private char pressao;
+    private Float pressao;
 
     @Column(name = "nr_imc")
     private int imc;
@@ -27,25 +28,27 @@ public class CapsuleWatch {
     @Column(name = "dt_data_hora")
     private Date dataHora;
 
-    @Column(name = "ds_dor")
-    private String dor;
+    @Column(name = "ds_sintomas")
+    private String sintomas;
+    
+    @OneToOne(mappedBy="capsuleWatch", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    private Monitoramento monitoramento;
 
-    public CapsuleWatch(Long capsuleWatch, int batimentos, Float temperatura, char pressao, int imc, Date dataHora, String dor) {
-        this.capsuleWatch = capsuleWatch;
+    public CapsuleWatch(int batimentos, Float temperatura, Float pressao, int imc, Date dataHora, String sintomas) {
         this.batimentos = batimentos;
         this.temperatura = temperatura;
         this.pressao = pressao;
         this.imc = imc;
         this.dataHora = dataHora;
-        this.dor = dor;
+        this.sintomas = sintomas;
     }
 
-    public Long getCapsuleWatch() {
-        return capsuleWatch;
+    public Long getCodigo() {
+        return codigo;
     }
 
-    public void setCapsuleWatch(Long capsuleWatch) {
-        this.capsuleWatch = capsuleWatch;
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public int getBatimentos() {
@@ -64,11 +67,11 @@ public class CapsuleWatch {
         this.temperatura = temperatura;
     }
 
-    public char getPressao() {
+    public Float getPressao() {
         return pressao;
     }
 
-    public void setPressao(char pressao) {
+    public void setPressao(Float pressao) {
         this.pressao = pressao;
     }
 
@@ -88,11 +91,20 @@ public class CapsuleWatch {
         this.dataHora = dataHora;
     }
 
-    public String getDor() {
-        return dor;
+    public String getSintomas() {
+        return sintomas;
     }
 
-    public void setDor(String dor) {
-        this.dor = dor;
+    public void setSintomas(String sintomas) {
+        this.sintomas = sintomas;
     }
+
+	public Monitoramento getMonitoramento() {
+		return monitoramento;
+	}
+
+	public void setMonitoramento(Monitoramento monitoramento) {
+		this.monitoramento = monitoramento;
+	}
+   
 }

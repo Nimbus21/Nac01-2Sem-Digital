@@ -1,7 +1,19 @@
 package br.com.fiap.capsuledev.domain;
 
-import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_PACIENTE")
@@ -20,13 +32,13 @@ public class Paciente {
     private Date nascimento;
 
     @Column(name = "nr_rg")
-    private char rg;
+    private String rg;
 
     @Column(name = "ds_genero")
     private String genero;
 
     @Column(name = "nm_mae")
-    private String mae;
+    private String nomeMae;
 
     @Column(name = "ds_endereco")
     private String endereco;
@@ -35,41 +47,33 @@ public class Paciente {
     private String contato;
 
     @Column(name = "tl_telefone")
-    private char telefone;
+    private String telefone;
 
     @Column(name = "ds_orgao")
     private String orgao;
-
-    @Column(name = "ds_hospital_cirurgia")
-    private String hospital;
-
+    
+    @ManyToMany
+    @JoinTable(name = "TB_PACIENTE_MONITORAMENTO", joinColumns=@JoinColumn(name="cd_paciente"), inverseJoinColumns=@JoinColumn(name="cd_monitoramento"))
+    private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
+    
     @Column(name = "dt_transplante")
     private Date transplante;
 
-    public Paciente(Long codigo, String nome, Date nascimento, char rg, String genero, String mae, String endereco, String contato, char telefone, String orgao, String hospital, Date transplante, String medico, String crm) {
+    public Paciente(Long codigo, String nome, Date nascimento, String rg, String genero, String nomeMae, String endereco, String contato, 
+    		String telefone, String orgao, Date transplante) 
+    {
         this.codigo = codigo;
         this.nome = nome;
         this.nascimento = nascimento;
         this.rg = rg;
         this.genero = genero;
-        this.mae = mae;
+        this.nomeMae = nomeMae;
         this.endereco = endereco;
         this.contato = contato;
         this.telefone = telefone;
         this.orgao = orgao;
-        this.hospital = hospital;
         this.transplante = transplante;
-        this.medico = medico;
-        this.crm = crm;
     }
-
-    @Column(name = "nm_medico_cirurgia")
-    private String medico;
-
-    @Column(name = "nr_crm_medico")
-    private String crm;
-
-
 
     public Long getCodigo() {
         return codigo;
@@ -95,11 +99,11 @@ public class Paciente {
         this.nascimento = nascimento;
     }
 
-    public char getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(char rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 
@@ -111,12 +115,12 @@ public class Paciente {
         this.genero = genero;
     }
 
-    public String getMae() {
-        return mae;
+    public String getNomeMae() {
+        return nomeMae;
     }
 
-    public void setMae(String mae) {
-        this.mae = mae;
+    public void setNomeMae(String nomeMae) {
+        this.nomeMae = nomeMae;
     }
 
     public String getEndereco() {
@@ -135,11 +139,11 @@ public class Paciente {
         this.contato = contato;
     }
 
-    public char getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(char telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
@@ -151,14 +155,6 @@ public class Paciente {
         this.orgao = orgao;
     }
 
-    public String getHospital() {
-        return hospital;
-    }
-
-    public void setHospital(String hospital) {
-        this.hospital = hospital;
-    }
-
     public Date getTransplante() {
         return transplante;
     }
@@ -167,19 +163,12 @@ public class Paciente {
         this.transplante = transplante;
     }
 
-    public String getMedico() {
-        return medico;
-    }
+	public List<Monitoramento> getMonitoramentos() {
+		return monitoramentos;
+	}
 
-    public void setMedico(String medico) {
-        this.medico = medico;
-    }
-
-    public String getCrm() {
-        return crm;
-    }
-
-    public void setCrm(String crm) {
-        this.crm = crm;
-    }
+	public void setMonitoramentos(List<Monitoramento> monitoramentos) {
+		this.monitoramentos = monitoramentos;
+	}
+    
 }
