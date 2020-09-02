@@ -20,7 +20,7 @@ public class MonitoramentoDTO {
 	private CapsuleWatch capsuleWatch;
 	private Medico medico;
 	private List<CapsuleControl> listaCapsuleControl;
-	private List<Paciente> pacientes;
+	private Paciente paciente;
 
 	public MonitoramentoDTO(Monitoramento monitoramento) {
 		this.codigo = monitoramento.getCodigo();
@@ -30,7 +30,7 @@ public class MonitoramentoDTO {
 		this.capsuleWatch = monitoramento.getCapsuleWatch();
 		this.medico = monitoramento.getMedico();
 		this.listaCapsuleControl = monitoramento.getListaCapsuleControl();
-		this.pacientes = monitoramento.getPacientes();
+		this.paciente = monitoramento.getPaciente();
 	}
 
 	public Long getCodigo() {
@@ -61,8 +61,8 @@ public class MonitoramentoDTO {
 		return listaCapsuleControl;
 	}
 
-	public List<Paciente> getPacientes() {
-		return pacientes;
+	public Paciente getPaciente() {
+		return paciente;
 	}
 
 	public static List<MonitoramentoDTO> converter(List<Monitoramento> monitoramentos) {

@@ -20,8 +20,9 @@ public class PacienteDTO {
     private String contato;
     private String telefone;
     private String orgao;
-    private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
     private Date transplante;
+    private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
+
     
     public PacienteDTO(Paciente paciente) {
     	this.codigo = paciente.getCodigo();
@@ -34,47 +35,47 @@ public class PacienteDTO {
     	this.contato = paciente.getContato();
     	this.telefone = paciente.getTelefone();
     	this.orgao = paciente.getOrgao();
-    	this.monitoramentos = paciente.getMonitoramentos();
     	this.transplante = paciente.getTransplante();
+    	this.monitoramentos = paciente.getMonitoramentos();
     }
     
-    public Long codigo() {
+    public Long getCodigo() {
     	return codigo;
     }
     
-    public String nome() {
+    public String getNome() {
     	return nome;
     }
     
-    public Date nascimento() {
+    public Date getNascimento() {
     	return nascimento;
     }
     
-    public String rg() {
+    public String getRg() {
     	return rg;
     }
     
-    public String genero() {
+    public String getGenero() {
     	return genero;
     }
     
-    public String nomeMae() {
+    public String getNomeMae() {
     	return nomeMae;
     }
     
-    public String endereco() {
+    public String getEndereco() {
     	return endereco;
     }
     
-    public String contato() {
+    public String getContato() {
     	return contato;
     }
     
-    public String telefone() {
+    public String getTelefone() {
     	return telefone;
     }
     
-    public String orgao() {
+    public String getOrgao() {
     	return orgao;
     }
     
@@ -82,7 +83,7 @@ public class PacienteDTO {
 		return monitoramentos;
 	}
 
-	public Date transplante() {
+	public Date getTransplante() {
 		return transplante;
 	}
 	

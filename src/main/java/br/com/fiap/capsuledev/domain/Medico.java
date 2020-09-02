@@ -11,17 +11,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "TB_MEDICO")
-@SequenceGenerator(name = "MedicoSequence", sequenceName = "SQ_MEDICO", allocationSize = 1)
+@SequenceGenerator(name = "medicoSequence", sequenceName = "SQ_MEDICO", allocationSize = 1)
 public class Medico {
 	
     @Id
     @Column(name = "cd_medico")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MedicoSequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "medicoSequence")
     private Long codigo;
 
     @Column(name = "nm_medico")
@@ -30,10 +34,14 @@ public class Medico {
     @Column(name = "nr_crm")
     private String crm;
     
-    @OneToMany(mappedBy="medico", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="medico", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonBackReference
     private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
+    
+    public Medico() {
+	}
 
-    public Medico(String nome, String crm) {
+	public Medico(String nome, String crm) {
         this.nome = nome;
         this.crm = crm;
     }
@@ -74,4 +82,5 @@ public class Medico {
 		monitoramento.setMedico(this);
 		monitoramentos.add(monitoramento);
 	}
+	
 }

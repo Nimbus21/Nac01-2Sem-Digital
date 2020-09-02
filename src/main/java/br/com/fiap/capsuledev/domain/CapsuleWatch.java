@@ -1,6 +1,10 @@
 package br.com.fiap.capsuledev.domain;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
 @Entity
@@ -31,10 +35,17 @@ public class CapsuleWatch {
     @Column(name = "ds_sintomas")
     private String sintomas;
     
-    @OneToOne(mappedBy="capsuleWatch", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy="capsuleWatch", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@OneToOne(mappedBy="capsuleWatch", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    @JsonBackReference
     private Monitoramento monitoramento;
 
-    public CapsuleWatch(int batimentos, Float temperatura, Float pressao, int imc, Date dataHora, String sintomas) {
+    
+    
+    public CapsuleWatch() {
+	}
+
+	public CapsuleWatch(int batimentos, Float temperatura, Float pressao, int imc, Date dataHora, String sintomas) {
         this.batimentos = batimentos;
         this.temperatura = temperatura;
         this.pressao = pressao;

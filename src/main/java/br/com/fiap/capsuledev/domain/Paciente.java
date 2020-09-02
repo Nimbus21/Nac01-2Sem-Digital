@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "TB_PACIENTE")
@@ -52,17 +55,19 @@ public class Paciente {
     @Column(name = "ds_orgao")
     private String orgao;
     
-    @ManyToMany
-    @JoinTable(name = "TB_PACIENTE_MONITORAMENTO", joinColumns=@JoinColumn(name="cd_paciente"), inverseJoinColumns=@JoinColumn(name="cd_monitoramento"))
-    private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
-    
     @Column(name = "dt_transplante")
     private Date transplante;
+    
+    @OneToMany(mappedBy="paciente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonBackReference
+    private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
+    
+    public Paciente() {
+	}
 
-    public Paciente(Long codigo, String nome, Date nascimento, String rg, String genero, String nomeMae, String endereco, String contato, 
+	public Paciente(String nome, Date nascimento, String rg, String genero, String nomeMae, String endereco, String contato, 
     		String telefone, String orgao, Date transplante) 
     {
-        this.codigo = codigo;
         this.nome = nome;
         this.nascimento = nascimento;
         this.rg = rg;
@@ -169,6 +174,11 @@ public class Paciente {
 
 	public void setMonitoramentos(List<Monitoramento> monitoramentos) {
 		this.monitoramentos = monitoramentos;
+	}
+	
+	public void addMonitoramentos(Monitoramento monitoramento) {
+		monitoramento.setPaciente(this);
+		monitoramentos.add(monitoramento);
 	}
     
 }

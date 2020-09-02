@@ -2,6 +2,10 @@ package br.com.fiap.capsuledev.domain;
 
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
 @Entity
@@ -27,10 +31,18 @@ public class CapsuleControl {
     private Date horaAlarme;
     
     @ManyToOne
-    @JoinColumn(name = "cd_monitoramento", nullable = false)
+    @JoinColumn(name = "cd_monitoramento", nullable = true)
+    @JsonBackReference
+    //true pra teste
     private Monitoramento monitoramento;
 
-    public CapsuleControl(String remedio, String dose, Date data, Date horaAlarme) {
+    
+    
+    public CapsuleControl() {
+	}
+
+
+	public CapsuleControl(String remedio, String dose, Date data, Date horaAlarme) {
         this.remedio = remedio;
         this.dose = dose;
         this.data = data;

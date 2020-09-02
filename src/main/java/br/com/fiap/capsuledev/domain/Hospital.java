@@ -14,6 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table (name = "TB_HOSPITAL_CLINICA")
@@ -40,6 +43,7 @@ public class Hospital {
 	@Column(name = "nr_telefone")
 	private String telefone;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="hospital", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
 

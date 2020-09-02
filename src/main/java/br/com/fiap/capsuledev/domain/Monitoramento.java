@@ -16,8 +16,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "TB_MONITORAMENTO")
@@ -36,24 +41,36 @@ public class Monitoramento {
     private Date fim;
     
     @ManyToOne
-    @JoinColumn(name = "cd_hospital", nullable = false)
+    @JoinColumn(name = "cd_hospital", nullable = true)
+    @JsonBackReference
     private Hospital hospital;
     
-    @OneToOne
+    //@OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+    //Nao ALL
     @JoinColumn(name = "cd_capsule_watch", nullable = false)
     private CapsuleWatch capsuleWatch;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    //@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
     @JoinColumn(name = "cd_medico", nullable = false)
     private Medico medico;
     
-    @OneToMany(mappedBy="monitoramento", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="monitoramento", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
     private List<CapsuleControl> listaCapsuleControl = new ArrayList<CapsuleControl>();
     
-    @ManyToMany(mappedBy="monitoramentos", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-    private List<Paciente> pacientes = new ArrayList<Paciente>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    //@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+    @JoinColumn(name = "cd_paciente", nullable = false)
+    //teste nullable
+    private Paciente paciente;
+    
+    
 
-    public Monitoramento(Date inicio, Date fim) {
+    public Monitoramento() {
+	}
+
+	public Monitoramento(Date inicio, Date fim) {
         this.inicio = inicio;
         this.fim = fim;
     }
@@ -114,13 +131,24 @@ public class Monitoramento {
 		this.listaCapsuleControl = listaCapsuleControl;
 	}
 
-	public List<Paciente> getPacientes() {
-		return pacientes;
+	public Paciente getPaciente() {
+		return paciente;
 	}
 
-	public void setPacientes(List<Paciente> pacientes) {
-		this.pacientes = pacientes;
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
+	
+	@PreRemove
+	private void removeMonitoramentoFromHospital() {
+		if (this.hospital == null) {
+			
+		}else {
+			hospital.getMonitoramentos().remove(this);
+		}
+	}
+	
+	//Nao tenho certeza se isso precisa
 	
 }
 

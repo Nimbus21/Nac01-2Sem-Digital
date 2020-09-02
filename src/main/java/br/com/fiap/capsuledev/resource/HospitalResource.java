@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,8 +35,7 @@ public class HospitalResource {
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<HospitalDTO> listar(String nome) {
-		//List<Hospital> hospitais = nome == null ? hospitalRepository.findAll() : hospitalRepository.findByNomeContaining(nome);
-		//acho mais fácil a leitura desse jeito, mas é a mesma coisa da linha de cima
+		
 		List<Hospital> hospitais = null;
 		
 		if (nome == null) {
@@ -57,6 +57,7 @@ public class HospitalResource {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<HospitalDTO> adicionar(@RequestBody Hospital hospital, UriComponentsBuilder uriBuilder) {
+		
 		hospitalRepository.save(hospital);
 		
 		URI uri = uriBuilder.path("/hospital/{id}").buildAndExpand(hospital.getCodigo()).toUri();
@@ -64,7 +65,6 @@ public class HospitalResource {
 		return ResponseEntity.created(uri).body(new HospitalDTO(hospital));
 	}
 	
-	//Testar
 	@PutMapping("{id}")
 	@Transactional
 	public ResponseEntity<HospitalDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody Hospital hospitalNovo){
@@ -82,7 +82,6 @@ public class HospitalResource {
 		
 	}
 	
-	//Testar
 	@DeleteMapping("{id}")
 	@Transactional
 	public ResponseEntity<?> apagar(@PathVariable("id") Long codigo){
