@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,6 +29,7 @@ public class Medico {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "medicoSequence")
     private Long codigo;
 
+	@NotBlank(message = "Nome não pode ficar vazio")
     @Column(name = "nm_medico")
     private String nome;
 

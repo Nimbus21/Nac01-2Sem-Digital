@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,7 +53,7 @@ public class CapsuleWatchResource {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<CapsuleWatchDTO> adicionar(@RequestBody CapsuleWatch capsuleWatch, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<CapsuleWatchDTO> adicionar(@RequestBody @Valid CapsuleWatch capsuleWatch, UriComponentsBuilder uriBuilder) {
 		capsuleWatchRepository.save(capsuleWatch);
 		
 		URI uri = uriBuilder.path("/capsuleWatch/{id}").buildAndExpand(capsuleWatch.getCodigo()).toUri();
@@ -62,7 +63,7 @@ public class CapsuleWatchResource {
 	
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<CapsuleWatchDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody CapsuleWatch capsuleWatchNovo) {
+	public ResponseEntity<CapsuleWatchDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody @Valid CapsuleWatch capsuleWatchNovo) {
 		Optional<CapsuleWatch> capsuleWatch = capsuleWatchRepository.findById(codigo);
 		
 		return capsuleWatch.map(c -> {

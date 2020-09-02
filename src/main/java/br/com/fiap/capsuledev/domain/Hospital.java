@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -37,6 +38,7 @@ public class Hospital {
 	@Column(name = "nr_inscricao_estadual")
 	private String inscricaoEstadual;
 	
+	@NotBlank(message = "Endereço obrigatório")
 	@Column(name = "ds_endereco")
 	private String endereco;
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jackson.JsonObjectSerializer;
@@ -56,7 +57,7 @@ public class HospitalResource {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<HospitalDTO> adicionar(@RequestBody Hospital hospital, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<HospitalDTO> adicionar(@RequestBody @Valid Hospital hospital, UriComponentsBuilder uriBuilder) {
 		
 		hospitalRepository.save(hospital);
 		
@@ -67,7 +68,7 @@ public class HospitalResource {
 	
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<HospitalDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody Hospital hospitalNovo){
+	public ResponseEntity<HospitalDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody @Valid Hospital hospitalNovo){
 		Optional<Hospital> hospital = hospitalRepository.findById(codigo);
 		
 		return hospital.map(h -> {

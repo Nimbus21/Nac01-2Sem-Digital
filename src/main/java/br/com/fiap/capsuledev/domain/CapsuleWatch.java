@@ -36,11 +36,8 @@ public class CapsuleWatch {
     private String sintomas;
     
     @OneToOne(mappedBy="capsuleWatch", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //@OneToOne(mappedBy="capsuleWatch", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
     @JsonBackReference
     private Monitoramento monitoramento;
-
-    
     
     public CapsuleWatch() {
 	}

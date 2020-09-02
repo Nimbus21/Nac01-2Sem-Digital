@@ -2,9 +2,9 @@ package br.com.fiap.capsuledev.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
 
@@ -18,9 +18,11 @@ public class CapsuleControl {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "capsuleControlSequence")
     private Long codigo;
     
+	@NotBlank(message = "Medicamento obrigatório")
     @Column(name = "ds_remedio")
     private String remedio;
 
+	@NotBlank(message = "Dose obrigatória")
     @Column(name = "ds_dose")
     private String dose;
 
@@ -33,14 +35,10 @@ public class CapsuleControl {
     @ManyToOne
     @JoinColumn(name = "cd_monitoramento", nullable = true)
     @JsonBackReference
-    //true pra teste
     private Monitoramento monitoramento;
-
-    
     
     public CapsuleControl() {
 	}
-
 
 	public CapsuleControl(String remedio, String dose, Date data, Date horaAlarme) {
         this.remedio = remedio;
@@ -49,7 +47,6 @@ public class CapsuleControl {
         this.horaAlarme = horaAlarme;
     }
     
-
     public Long getCodigo() {
 		return codigo;
 	}
@@ -89,7 +86,6 @@ public class CapsuleControl {
     public void setHoraAlarme(Date horaAlarme) {
         this.horaAlarme = horaAlarme;
     }
-
 
 	public Monitoramento getMonitoramento() {
 		return monitoramento;

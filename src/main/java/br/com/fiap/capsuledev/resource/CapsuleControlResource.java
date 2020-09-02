@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,7 +59,7 @@ public class CapsuleControlResource {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<CapsuleControlDTO> adicionar(@RequestBody CapsuleControl capsuleControl, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<CapsuleControlDTO> adicionar(@RequestBody @Valid CapsuleControl capsuleControl, UriComponentsBuilder uriBuilder) {
 		capsuleControlRepository.save(capsuleControl);
 		
 		URI uri = uriBuilder.path("/capsuleControl/{id}").buildAndExpand(capsuleControl.getCodigo()).toUri();
@@ -69,7 +70,7 @@ public class CapsuleControlResource {
 	//Testar
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<CapsuleControlDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody CapsuleControl capsuleControlNovo){
+	public ResponseEntity<CapsuleControlDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody @Valid CapsuleControl capsuleControlNovo){
 		Optional<CapsuleControl> capsuleControl = capsuleControlRepository.findById(codigo);
 		
 		return capsuleControl.map(c -> {

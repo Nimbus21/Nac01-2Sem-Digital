@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,7 +62,7 @@ public class MonitoramentoResource {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<MonitoramentoDTO> adicionar(@RequestBody Monitoramento monitoramento, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<MonitoramentoDTO> adicionar(@RequestBody @Valid Monitoramento monitoramento, UriComponentsBuilder uriBuilder) {
 		monitoramentoRepository.save(monitoramento);
 		
 		URI uri = uriBuilder.path("/monitoramento/{id}").buildAndExpand(monitoramento.getCodigo()).toUri();
@@ -71,7 +72,7 @@ public class MonitoramentoResource {
 	
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<MonitoramentoDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody Monitoramento monitoramentoNovo){
+	public ResponseEntity<MonitoramentoDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody @Valid Monitoramento monitoramentoNovo){
 		Optional<Monitoramento> monitoramento = monitoramentoRepository.findById(codigo);
 		
 		return monitoramento.map(m -> {

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,7 @@ public class MedicoResource {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<MedicoDTO> adicionar(@RequestBody Medico medico, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<MedicoDTO> adicionar(@RequestBody @Valid Medico medico, UriComponentsBuilder uriBuilder) {
 		medicoRepository.save(medico);
 		
 		URI uri = uriBuilder.path("/medico/{id}").buildAndExpand(medico.getCodigo()).toUri();
@@ -65,7 +66,7 @@ public class MedicoResource {
 	
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<MedicoDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody Medico medicoNovo){
+	public ResponseEntity<MedicoDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody @Valid Medico medicoNovo){
 		Optional<Medico> medico = medicoRepository.findById(codigo);
 		
 		return medico.map(m -> {

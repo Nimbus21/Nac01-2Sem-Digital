@@ -12,17 +12,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PreRemove;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.FutureOrPresent;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "TB_MONITORAMENTO")
@@ -36,7 +35,8 @@ public class Monitoramento {
 
     @Column(name = "dt_inicio")
     private Date inicio;
-
+    
+    @FutureOrPresent
     @Column(name = "dt_fim")
     private Date fim;
     
@@ -45,24 +45,21 @@ public class Monitoramento {
     @JsonBackReference
     private Hospital hospital;
     
-    //@OneToOne(cascade = CascadeType.ALL)
-    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-    //Nao ALL
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cd_capsule_watch", nullable = false)
     private CapsuleWatch capsuleWatch;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    //@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
     @JoinColumn(name = "cd_medico", nullable = false)
+    @Valid
     private Medico medico;
     
     @OneToMany(mappedBy="monitoramento", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
+    @Valid
     private List<CapsuleControl> listaCapsuleControl = new ArrayList<CapsuleControl>();
     
     @ManyToOne(cascade = CascadeType.ALL)
-    //@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
     @JoinColumn(name = "cd_paciente", nullable = false)
-    //teste nullable
     private Paciente paciente;
     
     
@@ -139,6 +136,7 @@ public class Monitoramento {
 		this.paciente = paciente;
 	}
 	
+	//Nao tenho certeza se isso precisa
 	@PreRemove
 	private void removeMonitoramentoFromHospital() {
 		if (this.hospital == null) {
@@ -147,8 +145,6 @@ public class Monitoramento {
 			hospital.getMonitoramentos().remove(this);
 		}
 	}
-	
-	//Nao tenho certeza se isso precisa
 	
 }
 
