@@ -1,10 +1,10 @@
-# Nac01-2Sem-Digital
+﻿# Nac01-2Sem-Digital
 
 Deploy em: https://capsuledevdigital01.herokuapp.com/
 
 # Como executar o projeto
 
-Localmente deve-se executar a classe Nac012SemDigital.java que contém o método main e inicia a aplicação dentro do Spring em servidor pré-definido pelo framework. A aplicação por padrão inicia em localhost na porta 80. Essa configuração, bem como as configurações do banco H2, encontra-se no arquivo application.properties presente em resources. Alternativamente é possível utilizar o link do Heroku que leva a um ambiente com a aplicação devidamente implementada. 
+Localmente deve-se executar a classe Nac012SemDigital.java que contém o método main e inicia a aplicação dentro do Spring em servidor pré-definido pelo framework. A aplicação, por padrão, inicia em localhost na porta 80. Essa configuração, bem como as configurações do banco H2, encontra-se no arquivo application.properties presente em resources. Alternativamente é possível utilizar o link do Heroku que leva a um ambiente com a aplicação devidamente implementada. 
 
 Para cadastrar uma entidade que depende da existência de outra (devido a constraint do banco de dados), via POST request, é necessário criar no corpo da requisição, o objeto JSON com os demais objetos requeridos simultaneamente. Para ler as entidades atualmente salvas no banco, via GET request, é preciso enviar a requisição na URL. Para atualizar, via PUT request, é preciso referenciar o código da entidade desejada na URL e também no objeto JSON com as informações atualizadas no corpo da requisição. Para apagar, via DELETE request, é necessário enviar a requisição pela URL seguida do código da entidade.
 
