@@ -64,7 +64,6 @@ public class PacienteResource {
 		return ResponseEntity.created(uri).body(new PacienteDTO(paciente));
 	}
 	
-	//Testar
 	@PutMapping("{id}")
 	@Transactional
 	public ResponseEntity<PacienteDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody @Valid Paciente pacienteNovo){
@@ -88,7 +87,6 @@ public class PacienteResource {
 		
 	}
 	
-	//Testar
 	@DeleteMapping("{id}")
 	@Transactional
 	public ResponseEntity<?> apagar(@PathVariable("id") Long codigo){

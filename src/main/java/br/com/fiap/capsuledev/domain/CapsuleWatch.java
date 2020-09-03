@@ -3,7 +3,6 @@ package br.com.fiap.capsuledev.domain;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
 

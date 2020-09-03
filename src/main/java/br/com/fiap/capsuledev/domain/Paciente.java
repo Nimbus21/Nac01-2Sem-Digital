@@ -31,6 +31,7 @@ public class Paciente {
     @Column(name = "nm_paciente")
     private String nome;
 
+    @Past
     @Column(name = "dt_nascimento")
     private Date nascimento;
 

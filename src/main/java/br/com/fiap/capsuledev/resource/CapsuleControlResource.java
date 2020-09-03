@@ -22,11 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.fiap.capsuledev.domain.CapsuleControl;
-import br.com.fiap.capsuledev.domain.Hospital;
 import br.com.fiap.capsuledev.domain.dto.CapsuleControlDTO;
-import br.com.fiap.capsuledev.domain.dto.HospitalDTO;
 import br.com.fiap.capsuledev.repository.CapsuleControlRepository;
-import br.com.fiap.capsuledev.repository.HospitalRepository;
 
 @RestController
 @RequestMapping("capsuleControl")
@@ -67,7 +64,6 @@ public class CapsuleControlResource {
 		return ResponseEntity.created(uri).body(new CapsuleControlDTO(capsuleControl));
 	}
 	
-	//Testar
 	@PutMapping("{id}")
 	@Transactional
 	public ResponseEntity<CapsuleControlDTO> atualizar(@PathVariable("id") Long codigo, @RequestBody @Valid CapsuleControl capsuleControlNovo){
@@ -85,7 +81,6 @@ public class CapsuleControlResource {
 		
 	}
 	
-	//Testar
 	@DeleteMapping("{id}")
 	@Transactional
 	public ResponseEntity<?> apagar(@PathVariable("id") Long codigo){
