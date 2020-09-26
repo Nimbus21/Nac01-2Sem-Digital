@@ -28,10 +28,11 @@ public class Medico {
     private Long codigo;
 
 	@NotBlank(message = "Nome não pode ficar vazio")
-    @Column(name = "nm_medico")
+    @Column(name = "nm_medico", nullable = false)
     private String nome;
-
-    @Column(name = "nr_crm")
+	
+	@NotBlank(message = "CRM não pode ficar vazio")
+    @Column(name = "nr_crm", nullable = false)
     private String crm;
     
     @OneToMany(mappedBy="medico", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
