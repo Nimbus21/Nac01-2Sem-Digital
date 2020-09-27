@@ -43,7 +43,6 @@ public class Monitoramento {
     @ManyToOne
     @JoinColumn(name = "cd_hospital", nullable = true)
     @JsonBackReference
-    @Valid
     private Hospital hospital;
     
     @OneToOne(cascade = CascadeType.ALL)
@@ -52,7 +51,6 @@ public class Monitoramento {
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cd_medico", nullable = false)
-    @Valid
     private Medico medico;
     
     @OneToMany(mappedBy="monitoramento", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
