@@ -43,6 +43,7 @@ public class Monitoramento {
     @ManyToOne
     @JoinColumn(name = "cd_hospital", nullable = true)
     @JsonBackReference
+    @Valid
     private Hospital hospital;
     
     @OneToOne(cascade = CascadeType.ALL)
