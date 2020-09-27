@@ -51,6 +51,7 @@ public class Monitoramento {
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cd_medico", nullable = false)
+    @JsonBackReference
     private Medico medico;
     
     @OneToMany(mappedBy="monitoramento", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
