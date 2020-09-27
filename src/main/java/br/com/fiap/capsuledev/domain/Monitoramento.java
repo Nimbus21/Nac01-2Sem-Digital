@@ -46,7 +46,6 @@ public class Monitoramento {
     private Hospital hospital;
     
     @OneToOne(cascade = CascadeType.ALL)
-    //Costumava ser ALL
     @JoinColumn(name = "cd_capsule_watch", nullable = false)
     private CapsuleWatch capsuleWatch;
     
@@ -60,12 +59,11 @@ public class Monitoramento {
     @Valid
     private List<CapsuleControl> listaCapsuleControl = new ArrayList<CapsuleControl>();
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    //Costumava ser ALL
     @JoinColumn(name = "cd_paciente", nullable = false)
     private Paciente paciente;
     
-    
-
     public Monitoramento() {
 	}
 

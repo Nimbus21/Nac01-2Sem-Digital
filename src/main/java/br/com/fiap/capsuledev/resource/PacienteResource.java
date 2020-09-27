@@ -1,6 +1,7 @@
 package br.com.fiap.capsuledev.resource;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.fiap.capsuledev.domain.Monitoramento;
 import br.com.fiap.capsuledev.domain.Paciente;
 import br.com.fiap.capsuledev.domain.dto.PacienteDTO;
 import br.com.fiap.capsuledev.repository.PacienteRepository;
@@ -45,6 +47,35 @@ public class PacienteResource {
 		}
 		
 		return PacienteDTO.converter(pacientes);
+	}
+	
+	@GetMapping("pacientesByMedico")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<PacienteDTO> listarPacientesByMedico(Long codigo){
+		if (codigo == null) {
+			//System.out.println("Codigo chegou nulo");
+		}
+		else {
+			//System.out.println(codigo);
+		}		
+		
+		List<Paciente> pacientes = pacienteRepository.findAll();
+		List<Paciente> listaPacientesUnicos = new ArrayList<Paciente>();
+		
+		for (Paciente paciente : pacientes) {
+			for (Monitoramento monitoramento : paciente.getMonitoramentos()) {
+				if (monitoramento.getMedico().getCodigo().equals(codigo)) {
+					if (listaPacientesUnicos.contains(monitoramento.getPaciente())) {
+						
+					} else {
+						listaPacientesUnicos.add(monitoramento.getPaciente());
+					}
+					
+				}
+			}
+		}
+		//System.out.println(listaPacientesUnicos.size());
+		return PacienteDTO.converter(listaPacientesUnicos);
 	}
 	
 	@GetMapping("{id}")
