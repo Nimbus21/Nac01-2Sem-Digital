@@ -27,11 +27,11 @@ public class Medico {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "medicoSequence")
     private Long codigo;
 
-	@NotBlank(message = "Nome não pode ficar vazio")
+	//@NotBlank(message = "Nome não pode ficar vazio")
     @Column(name = "nm_medico", nullable = false)
     private String nome;
 	
-	@NotBlank(message = "CRM não pode ficar vazio")
+	//@NotBlank(message = "CRM não pode ficar vazio")
     @Column(name = "nr_crm", nullable = false)
     private String crm;
     
