@@ -41,17 +41,19 @@ public class Monitoramento {
     private Date fim;
     
     @ManyToOne
-    @JoinColumn(name = "cd_hospital", nullable = true)
+    @JoinColumn(name = "cd_hospital", nullable = false)
     @JsonBackReference
     private Hospital hospital;
     
     @OneToOne(cascade = CascadeType.ALL)
+    //Costumava ser ALL
     @JoinColumn(name = "cd_capsule_watch", nullable = false)
     private CapsuleWatch capsuleWatch;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    //Costumava ser ALL
     @JoinColumn(name = "cd_medico", nullable = false)
-    @JsonBackReference
+    //@JsonBackReference não pode ficar :(
     private Medico medico;
     
     @OneToMany(mappedBy="monitoramento", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)

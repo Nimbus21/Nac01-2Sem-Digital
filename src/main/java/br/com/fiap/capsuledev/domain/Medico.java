@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -28,15 +27,16 @@ public class Medico {
     private Long codigo;
 
 	//@NotBlank(message = "Nome não pode ficar vazio")
-    @Column(name = "nm_medico", nullable = false)
+    @Column(name = "nm_medico")
     private String nome;
 	
 	//@NotBlank(message = "CRM não pode ficar vazio")
-    @Column(name = "nr_crm", nullable = false)
+    @Column(name = "nr_crm")
     private String crm;
     
     @OneToMany(mappedBy="medico", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonBackReference
+    //@JsonManagedReference
     private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
     
     public Medico() {
