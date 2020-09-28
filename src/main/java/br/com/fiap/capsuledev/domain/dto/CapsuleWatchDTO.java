@@ -10,10 +10,10 @@ import br.com.fiap.capsuledev.domain.Monitoramento;
 public class CapsuleWatchDTO {
 	
 	private Long codigo;
-	private int batimentos;
+	private Integer batimentos;
 	private Float temperatura;
 	private Float pressao;
-	private int imc;
+	private Float imc;
 	private Date dataHora;
 	private String sintomas;
 	private Monitoramento monitoramento;
@@ -33,7 +33,7 @@ public class CapsuleWatchDTO {
 		return codigo;
 	}
 	
-	public int getBatimentos() {
+	public Integer getBatimentos() {
 		return batimentos;
 	}
 	
@@ -45,7 +45,7 @@ public class CapsuleWatchDTO {
 		return pressao;
 	}
 	
-	public int getImc() {
+	public Float getImc() {
 		return imc;
 	}
 	

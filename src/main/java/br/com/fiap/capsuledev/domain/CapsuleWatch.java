@@ -17,7 +17,7 @@ public class CapsuleWatch {
     private Long codigo;
 
     @Column(name = "nr_batimento")
-    private int batimentos;
+    private Integer batimentos;
 
     @Column(name = "nr_temperatura")
     private Float temperatura;
@@ -26,7 +26,7 @@ public class CapsuleWatch {
     private Float pressao;
 
     @Column(name = "nr_imc")
-    private int imc;
+    private Float imc;
 
     @Column(name = "dt_data_hora")
     private Date dataHora;
@@ -41,7 +41,7 @@ public class CapsuleWatch {
     public CapsuleWatch() {
 	}
 
-	public CapsuleWatch(int batimentos, Float temperatura, Float pressao, int imc, Date dataHora, String sintomas) {
+	public CapsuleWatch(Integer batimentos, Float temperatura, Float pressao, Float imc, Date dataHora, String sintomas) {
         this.batimentos = batimentos;
         this.temperatura = temperatura;
         this.pressao = pressao;
@@ -58,11 +58,11 @@ public class CapsuleWatch {
         this.codigo = codigo;
     }
 
-    public int getBatimentos() {
+    public Integer getBatimentos() {
         return batimentos;
     }
 
-    public void setBatimentos(int batimentos) {
+    public void setBatimentos(Integer batimentos) {
         this.batimentos = batimentos;
     }
 
@@ -82,11 +82,11 @@ public class CapsuleWatch {
         this.pressao = pressao;
     }
 
-    public int getImc() {
+    public Float getImc() {
         return imc;
     }
 
-    public void setImc(int imc) {
+    public void setImc(Float imc) {
         this.imc = imc;
     }
 
