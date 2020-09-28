@@ -14,8 +14,10 @@ import br.com.fiap.capsuledev.domain.Paciente;
 public class MonitoramentoDTO {
 
 	private Long codigo;
+	private String descricao;
 	private Date inicio;
 	private Date fim;
+	private Boolean ativo;
 	private Hospital hospital;
 	private CapsuleWatch capsuleWatch;
 	private Medico medico;
@@ -24,8 +26,10 @@ public class MonitoramentoDTO {
 
 	public MonitoramentoDTO(Monitoramento monitoramento) {
 		this.codigo = monitoramento.getCodigo();
+		this.descricao = monitoramento.getDescricao();
 		this.inicio = monitoramento.getInicio();
 		this.fim = monitoramento.getFim();
+		this.ativo = monitoramento.getAtivo();
 		this.hospital = monitoramento.getHospital();
 		this.capsuleWatch = monitoramento.getCapsuleWatch();
 		this.medico = monitoramento.getMedico();
@@ -36,6 +40,10 @@ public class MonitoramentoDTO {
 	public Long getCodigo() {
 		return codigo;
 	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
 
 	public Date getInicio() {
 		return inicio;
@@ -43,6 +51,10 @@ public class MonitoramentoDTO {
 
 	public Date getFim() {
 		return fim;
+	}
+	
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
 	public Hospital getHospital() {

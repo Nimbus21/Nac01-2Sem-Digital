@@ -83,6 +83,8 @@ public class MonitoramentoResource {
 			m.setListaCapsuleControl(monitoramentoNovo.getListaCapsuleControl());
 			m.setMedico(monitoramentoNovo.getMedico());
 			m.setPaciente(monitoramentoNovo.getPaciente());
+			m.setDescricao(monitoramentoNovo.getDescricao());
+			m.setAtivo(monitoramentoNovo.getAtivo());
 			monitoramentoRepository.save(m);
 			return ResponseEntity.ok(new MonitoramentoDTO(m));
 		}).orElse(ResponseEntity.notFound().build());

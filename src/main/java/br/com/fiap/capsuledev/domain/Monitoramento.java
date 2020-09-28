@@ -32,6 +32,9 @@ public class Monitoramento {
     @Column(name = "cd_monitoramento")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "monitoramentoSequence")
     private Long codigo;
+    
+    @Column(name = "ds_monitoramento")
+    private String descricao;
 
     @Column(name = "dt_inicio")
     private Date inicio;
@@ -39,6 +42,9 @@ public class Monitoramento {
     @FutureOrPresent
     @Column(name = "dt_fim")
     private Date fim;
+    
+    @Column(name = "st_monitoramento")
+    private Boolean ativo;
     
     @ManyToOne
     @JoinColumn(name = "cd_hospital", nullable = false)
@@ -67,9 +73,11 @@ public class Monitoramento {
     public Monitoramento() {
 	}
 
-	public Monitoramento(Date inicio, Date fim) {
+	public Monitoramento(String descricao, Date inicio, Date fim, Boolean ativo) {
+		this.descricao = descricao;
         this.inicio = inicio;
         this.fim = fim;
+        this.ativo = ativo;
     }
 
     public Long getCodigo() {
@@ -79,8 +87,16 @@ public class Monitoramento {
     public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
+    
+    public String getDescricao() {
+		return descricao;
+	}
 
-    public Date getInicio() {
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Date getInicio() {
         return inicio;
     }
 
@@ -95,6 +111,14 @@ public class Monitoramento {
     public void setFim(Date fim) {
         this.fim = fim;
     }
+    
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 
 	public Hospital getHospital() {
 		return hospital;

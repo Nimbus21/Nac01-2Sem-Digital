@@ -74,6 +74,7 @@ public class PacienteResource {
 				}
 			}
 		}
+		System.out.println("Cheguei");
 		//System.out.println(listaPacientesUnicos.size());
 		return PacienteDTO.converter(listaPacientesUnicos);
 	}
