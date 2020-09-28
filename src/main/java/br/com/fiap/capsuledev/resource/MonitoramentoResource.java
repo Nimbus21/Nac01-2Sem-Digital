@@ -76,7 +76,7 @@ public class MonitoramentoResource {
 		Optional<Monitoramento> monitoramento = monitoramentoRepository.findById(codigo);
 		
 		return monitoramento.map(m -> {
-			m.setCapsuleWatch(monitoramentoNovo.getCapsuleWatch());
+			m.setListaCapsuleWatch(monitoramentoNovo.getListaCapsuleWatch());
 			m.setFim(monitoramentoNovo.getFim());
 			m.setHospital(monitoramentoNovo.getHospital());
 			m.setInicio(monitoramentoNovo.getInicio());
@@ -85,6 +85,7 @@ public class MonitoramentoResource {
 			m.setPaciente(monitoramentoNovo.getPaciente());
 			m.setDescricao(monitoramentoNovo.getDescricao());
 			m.setAtivo(monitoramentoNovo.getAtivo());
+			m.setFrequenciaSegundos(monitoramentoNovo.getFrequenciaSegundos());
 			monitoramentoRepository.save(m);
 			return ResponseEntity.ok(new MonitoramentoDTO(m));
 		}).orElse(ResponseEntity.notFound().build());

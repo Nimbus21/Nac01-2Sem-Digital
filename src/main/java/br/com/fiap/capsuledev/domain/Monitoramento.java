@@ -46,14 +46,22 @@ public class Monitoramento {
     @Column(name = "st_monitoramento")
     private Boolean ativo;
     
+    @Column(name = "nr_frequencia_segundos")
+    private Long frequenciaSegundos;
+    //Relatórios CapsuleWatch chegam a cada 'frequenciaSegundos' segundos
+    
     @ManyToOne
     @JoinColumn(name = "cd_hospital", nullable = false)
     @JsonBackReference
     private Hospital hospital;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cd_capsule_watch", nullable = false)
-    private CapsuleWatch capsuleWatch;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "cd_capsule_watch", nullable = false)
+//    private CapsuleWatch capsuleWatch;
+    
+    @OneToMany(mappedBy="monitoramento", fetch = FetchType.LAZY)
+    //Cascade? Not sure
+    private List<CapsuleWatch> listaCapsuleWatch = new ArrayList<CapsuleWatch>();
     
     @ManyToOne
     //Costumava ser ALL
@@ -61,7 +69,8 @@ public class Monitoramento {
     //@JsonBackReference não pode ficar :(
     private Medico medico;
     
-    @OneToMany(mappedBy="monitoramento", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="monitoramento", fetch = FetchType.LAZY)
+    //Costumava ser cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH },
     @Valid
     private List<CapsuleControl> listaCapsuleControl = new ArrayList<CapsuleControl>();
     
@@ -73,11 +82,12 @@ public class Monitoramento {
     public Monitoramento() {
 	}
 
-	public Monitoramento(String descricao, Date inicio, Date fim, Boolean ativo) {
+	public Monitoramento(String descricao, Date inicio, Date fim, Boolean ativo, Long frequenciaSegundos) {
 		this.descricao = descricao;
         this.inicio = inicio;
         this.fim = fim;
         this.ativo = ativo;
+        this.frequenciaSegundos = frequenciaSegundos;
     }
 
     public Long getCodigo() {
@@ -120,6 +130,14 @@ public class Monitoramento {
 		this.ativo = ativo;
 	}
 
+	public Long getFrequenciaSegundos() {
+		return frequenciaSegundos;
+	}
+
+	public void setFrequenciaSegundos(Long frequenciaSegundos) {
+		this.frequenciaSegundos = frequenciaSegundos;
+	}
+
 	public Hospital getHospital() {
 		return hospital;
 	}
@@ -128,12 +146,12 @@ public class Monitoramento {
 		this.hospital = hospital;
 	}
 
-	public CapsuleWatch getCapsuleWatch() {
-		return capsuleWatch;
+	public List<CapsuleWatch> getListaCapsuleWatch() {
+		return listaCapsuleWatch;
 	}
 
-	public void setCapsuleWatch(CapsuleWatch capsuleWatch) {
-		this.capsuleWatch = capsuleWatch;
+	public void setListaCapsuleWatch(List<CapsuleWatch> listaCapsuleWatch) {
+		this.listaCapsuleWatch = listaCapsuleWatch;
 	}
 
 	public Medico getMedico() {

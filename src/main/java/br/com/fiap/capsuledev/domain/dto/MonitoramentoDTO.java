@@ -18,8 +18,9 @@ public class MonitoramentoDTO {
 	private Date inicio;
 	private Date fim;
 	private Boolean ativo;
+	private Long frequenciaSegundos;
 	private Hospital hospital;
-	private CapsuleWatch capsuleWatch;
+	private List<CapsuleWatch> listaCapsuleWatch;
 	private Medico medico;
 	private List<CapsuleControl> listaCapsuleControl;
 	private Paciente paciente;
@@ -30,8 +31,9 @@ public class MonitoramentoDTO {
 		this.inicio = monitoramento.getInicio();
 		this.fim = monitoramento.getFim();
 		this.ativo = monitoramento.getAtivo();
+		this.frequenciaSegundos = monitoramento.getFrequenciaSegundos();
 		this.hospital = monitoramento.getHospital();
-		this.capsuleWatch = monitoramento.getCapsuleWatch();
+		this.listaCapsuleWatch = monitoramento.getListaCapsuleWatch();
 		this.medico = monitoramento.getMedico();
 		this.listaCapsuleControl = monitoramento.getListaCapsuleControl();
 		this.paciente = monitoramento.getPaciente();
@@ -57,12 +59,16 @@ public class MonitoramentoDTO {
 		return ativo;
 	}
 
+	public Long getFrequenciaSegundos() {
+		return frequenciaSegundos;
+	}
+
 	public Hospital getHospital() {
 		return hospital;
 	}
 
-	public CapsuleWatch getCapsuleWatch() {
-		return capsuleWatch;
+	public List<CapsuleWatch> getListaCapsuleWatch() {
+		return listaCapsuleWatch;
 	}
 
 	public Medico getMedico() {

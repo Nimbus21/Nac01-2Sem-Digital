@@ -15,7 +15,6 @@ public class CapsuleWatchDTO {
 	private Float pressao;
 	private Float imc;
 	private Date dataHora;
-	private String sintomas;
 	private Monitoramento monitoramento;
 	
 	public CapsuleWatchDTO(CapsuleWatch capsuleWatch) {
@@ -25,7 +24,6 @@ public class CapsuleWatchDTO {
 		this.pressao = capsuleWatch.getPressao();
 		this.imc = capsuleWatch.getImc();
 		this.dataHora = capsuleWatch.getDataHora();
-		this.sintomas = capsuleWatch.getSintomas();
 		this.monitoramento = capsuleWatch.getMonitoramento();
 	}
 	
@@ -51,10 +49,6 @@ public class CapsuleWatchDTO {
 	
 	public Date getDataHora() {
 		return dataHora;
-	}
-	
-	public String getSintomas() {
-		return sintomas;
 	}
 	
 	public Monitoramento getMonitoramento() {

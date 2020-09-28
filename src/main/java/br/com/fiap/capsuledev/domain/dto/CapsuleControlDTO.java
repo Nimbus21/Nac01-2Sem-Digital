@@ -13,7 +13,6 @@ public class CapsuleControlDTO {
 	private String remedio;
 	private String dose;
 	private Date data;
-	private Date horaAlarme;
 	private Monitoramento monitoramento;
 	
 	public CapsuleControlDTO(CapsuleControl capsuleControl) {
@@ -21,7 +20,6 @@ public class CapsuleControlDTO {
 		this.remedio = capsuleControl.getRemedio();
 		this.dose = capsuleControl.getDose();
 		this.data = capsuleControl.getData();
-		this.horaAlarme = capsuleControl.getHoraAlarme();
 		this.monitoramento = capsuleControl.getMonitoramento();
 	}
 	
@@ -39,10 +37,6 @@ public class CapsuleControlDTO {
 	
 	public Date getData() {
 		return data;
-	}
-	
-	public Date getHoraAlarme() {
-		return horaAlarme;
 	}
 	
 	public Monitoramento getMonitoramento() {

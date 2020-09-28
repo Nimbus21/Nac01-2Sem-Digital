@@ -34,15 +34,11 @@ public class CapsuleWatchResource {
 	
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<CapsuleWatchDTO> listar(String sintomas) {
-		List<CapsuleWatch> listaCapsuleWatch = null;
+	public List<CapsuleWatchDTO> listar() {
+		List<CapsuleWatch> listaCapsuleWatch = capsuleWatchRepository.findAll();
 		
-		if (sintomas == null ) {
-			listaCapsuleWatch = capsuleWatchRepository.findAll();
-		} else {
-			listaCapsuleWatch = capsuleWatchRepository.findBySintomasContaining(sintomas);
-		}
 		return CapsuleWatchDTO.converter(listaCapsuleWatch);
+		//cuidado com esse aqui, foi alterado
 	}
 	
 	@GetMapping("{id}")
@@ -72,7 +68,6 @@ public class CapsuleWatchResource {
 			c.setImc(capsuleWatchNovo.getImc());
 			c.setMonitoramento(capsuleWatchNovo.getMonitoramento());
 			c.setPressao(capsuleWatchNovo.getPressao());
-			c.setSintomas(capsuleWatchNovo.getSintomas());
 			c.setTemperatura(capsuleWatchNovo.getTemperatura());
 			capsuleWatchRepository.save(c);
 			return ResponseEntity.ok(new CapsuleWatchDTO(c));

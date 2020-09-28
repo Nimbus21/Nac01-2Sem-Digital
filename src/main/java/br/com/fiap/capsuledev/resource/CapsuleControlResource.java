@@ -72,7 +72,6 @@ public class CapsuleControlResource {
 		return capsuleControl.map(c -> {
 			c.setData(capsuleControlNovo.getData());
 			c.setDose(capsuleControlNovo.getDose());
-			c.setHoraAlarme(capsuleControlNovo.getHoraAlarme());
 			c.setMonitoramento(capsuleControlNovo.getMonitoramento());
 			c.setRemedio(capsuleControlNovo.getRemedio());
 			capsuleControlRepository.save(c);

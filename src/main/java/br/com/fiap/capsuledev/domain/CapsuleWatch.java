@@ -30,24 +30,22 @@ public class CapsuleWatch {
 
     @Column(name = "dt_data_hora")
     private Date dataHora;
-
-    @Column(name = "ds_sintomas")
-    private String sintomas;
     
-    @OneToOne(mappedBy="capsuleWatch", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @OneToOne(mappedBy="capsuleWatch", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "cd_monitoramento", nullable = false)
     @JsonBackReference
     private Monitoramento monitoramento;
     
     public CapsuleWatch() {
 	}
 
-	public CapsuleWatch(Integer batimentos, Float temperatura, Float pressao, Float imc, Date dataHora, String sintomas) {
+	public CapsuleWatch(Integer batimentos, Float temperatura, Float pressao, Float imc, Date dataHora) {
         this.batimentos = batimentos;
         this.temperatura = temperatura;
         this.pressao = pressao;
         this.imc = imc;
         this.dataHora = dataHora;
-        this.sintomas = sintomas;
     }
 
     public Long getCodigo() {
@@ -96,14 +94,6 @@ public class CapsuleWatch {
 
     public void setDataHora(Date dataHora) {
         this.dataHora = dataHora;
-    }
-
-    public String getSintomas() {
-        return sintomas;
-    }
-
-    public void setSintomas(String sintomas) {
-        this.sintomas = sintomas;
     }
 
 	public Monitoramento getMonitoramento() {

@@ -28,23 +28,19 @@ public class CapsuleControl {
 
     @Column(name = "dt_data")
     private Date data;
-
-    @Column(name = "hr_alarme")
-    private Date horaAlarme;
     
     @ManyToOne
-    @JoinColumn(name = "cd_monitoramento", nullable = true)
+    @JoinColumn(name = "cd_monitoramento", nullable = false)
     @JsonBackReference
     private Monitoramento monitoramento;
     
     public CapsuleControl() {
 	}
 
-	public CapsuleControl(String remedio, String dose, Date data, Date horaAlarme) {
+	public CapsuleControl(String remedio, String dose, Date data) {
         this.remedio = remedio;
         this.dose = dose;
         this.data = data;
-        this.horaAlarme = horaAlarme;
     }
     
     public Long getCodigo() {
@@ -77,14 +73,6 @@ public class CapsuleControl {
 
     public void setData(Date data) {
         this.data = data;
-    }
-
-    public Date getHoraAlarme() {
-        return horaAlarme;
-    }
-
-    public void setHoraAlarme(Date horaAlarme) {
-        this.horaAlarme = horaAlarme;
     }
 
 	public Monitoramento getMonitoramento() {
