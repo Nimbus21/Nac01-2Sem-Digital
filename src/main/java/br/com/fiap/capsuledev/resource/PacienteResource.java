@@ -53,10 +53,8 @@ public class PacienteResource {
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<PacienteDTO> listarPacientesByMedico(Long codigo){
 		if (codigo == null) {
-			//System.out.println("Codigo chegou nulo");
 		}
 		else {
-			//System.out.println(codigo);
 		}		
 		
 		List<Paciente> pacientes = pacienteRepository.findAll();
@@ -74,7 +72,6 @@ public class PacienteResource {
 				}
 			}
 		}
-		System.out.println("Cheguei");
 		//System.out.println(listaPacientesUnicos.size());
 		return PacienteDTO.converter(listaPacientesUnicos);
 	}
