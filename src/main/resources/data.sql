@@ -28,3 +28,6 @@ INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nas
 
  INSERT INTO TB_CAPSULE_WATCH (cd_capsule_watch, nr_batimento, dt_data_hora, nr_imc, nr_pressao, nr_temperatura, cd_monitoramento) VALUES
  (SQ_CAPSULE_WATCH.nextval, 4, '2021-08-04 11:53:00', 8.2, 11.1, 36.2, 1);
+ 
+ INSERT INTO TB_CAPSULE_CONTROL (cd_capsule_control, dt_data, ds_dose, ds_remedio, cd_monitoramento) VALUES
+ (SQ_CAPSULE_CONTROL.nextval, '2021-03-12 14:51:02', '3 comprimidos por dia', 'dipirona', 1);
