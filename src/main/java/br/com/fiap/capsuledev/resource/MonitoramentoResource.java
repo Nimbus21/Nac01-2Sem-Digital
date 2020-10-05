@@ -45,13 +45,32 @@ public class MonitoramentoResource {
 		
 		if (nomeHospital == null) {
 			monitoramentos = monitoramentoRepository.findAll();
-		} else {
+		} 
+		
+		else {
 			List<Hospital> hospital = hospitalRepository.findByNomeContaining(nomeHospital);
 			monitoramentos = monitoramentoRepository.findByHospital(hospital.get(0));
 		}
 		
 		return MonitoramentoDTO.converter(monitoramentos);
 		
+	}
+	
+	@GetMapping("status")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<MonitoramentoDTO> listarStatus(Boolean status){
+		System.out.println("Cheguei status");
+		List<Monitoramento> monitoramentos = null;
+		
+		if (status == true) {
+			monitoramentos = monitoramentoRepository.findByAtivoTrue();
+		}
+		
+		if (status == false) {
+			monitoramentos = monitoramentoRepository.findByAtivoFalse();
+		}
+		
+		return MonitoramentoDTO.converter(monitoramentos);
 	}
 	
 	@GetMapping("{id}")

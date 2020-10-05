@@ -9,5 +9,7 @@ import br.com.fiap.capsuledev.domain.Monitoramento;
 
 public interface MonitoramentoRepository extends JpaRepository<Monitoramento, Long>{
 	List<Monitoramento> findByHospital (Hospital hospital);
+	List<Monitoramento> findByAtivoTrue();
+	List<Monitoramento> findByAtivoFalse();
 	//It worked!
 }

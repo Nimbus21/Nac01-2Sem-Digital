@@ -18,10 +18,10 @@ INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nas
  (SQ_MONITORAMENTO.nextval, false, 'primeiro monitoramento Thandy', '2021-08-04 21:58:00', 1000, '2010-02-02 21:58:41', 1, 1, 1);
  
   INSERT INTO TB_MONITORAMENTO (cd_monitoramento, st_monitoramento, ds_monitoramento, dt_fim, nr_frequencia_segundos, dt_inicio, cd_hospital, cd_medico, cd_paciente) VALUES
- (SQ_MONITORAMENTO.nextval, false, 'segundo monitoramento Thandy', '2021-10-04 22:11:00', 2000, '2010-02-02 21:58:41', 1, 1, 1);
+ (SQ_MONITORAMENTO.nextval, true, 'segundo monitoramento Thandy', '2021-10-04 22:11:00', 2000, '2010-02-02 21:58:41', 1, 1, 1);
  
   INSERT INTO TB_MONITORAMENTO (cd_monitoramento, st_monitoramento, ds_monitoramento, dt_fim, nr_frequencia_segundos, dt_inicio, cd_hospital, cd_medico, cd_paciente) VALUES
- (SQ_MONITORAMENTO.nextval, false, 'primeiro monitoramento Gui', '2021-08-04 11:53:00', 3000, '2010-02-02 21:58:41', 1, 1, 2);
+ (SQ_MONITORAMENTO.nextval, true, 'primeiro monitoramento Gui', '2021-08-04 11:53:00', 3000, '2010-02-02 21:58:41', 1, 1, 2);
  
   INSERT INTO TB_MONITORAMENTO (cd_monitoramento, st_monitoramento, ds_monitoramento, dt_fim, nr_frequencia_segundos, dt_inicio, cd_hospital, cd_medico, cd_paciente) VALUES
  (SQ_MONITORAMENTO.nextval, false, 'segundo monitoramento Gui', '2021-08-04 03:24:19', 4000, '2010-02-02 21:58:41', 1, 1, 2);
