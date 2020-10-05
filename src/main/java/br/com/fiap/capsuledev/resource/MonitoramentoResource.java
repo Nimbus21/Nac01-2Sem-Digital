@@ -59,7 +59,6 @@ public class MonitoramentoResource {
 	@GetMapping("status")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<MonitoramentoDTO> listarStatus(Boolean status){
-		System.out.println("Cheguei status");
 		List<Monitoramento> monitoramentos = null;
 		
 		if (status == true) {
