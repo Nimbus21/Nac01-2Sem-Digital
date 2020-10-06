@@ -29,7 +29,7 @@ public class CapsuleControl {
     @Column(name = "dt_data")
     private Date data;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "cd_monitoramento", nullable = false)
     @JsonBackReference
     private Monitoramento monitoramento;

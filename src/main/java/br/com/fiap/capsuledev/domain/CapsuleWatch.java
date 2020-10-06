@@ -32,7 +32,7 @@ public class CapsuleWatch {
     private Date dataHora;
     
 //    @OneToOne(mappedBy="capsuleWatch", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "cd_monitoramento", nullable = false)
     @JsonBackReference
     private Monitoramento monitoramento;

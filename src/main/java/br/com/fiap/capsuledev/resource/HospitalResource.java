@@ -88,6 +88,10 @@ public class HospitalResource {
 		Optional<Hospital> hospital = hospitalRepository.findById(codigo);
 		return hospital.map(h -> {
 			hospitalRepository.deleteById(codigo);
+			
+			
+			
+			
 			return ResponseEntity.ok().build();
 		}).orElse(ResponseEntity.notFound().build());
 	}
