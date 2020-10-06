@@ -1,6 +1,7 @@
 package br.com.fiap.capsuledev.resource;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,6 +71,41 @@ public class MonitoramentoResource {
 		}
 		
 		return MonitoramentoDTO.converter(monitoramentos);
+	}
+	
+	@GetMapping("{id}/status")
+	public List<MonitoramentoDTO> listarStatusPaciente(@PathVariable("id")Long codigo, Boolean status){
+		List<Monitoramento> monitoramentos = null;
+		List<Monitoramento> monitoramentosStatus = new ArrayList<Monitoramento>();
+
+		if (status == true) {
+			
+			monitoramentos = monitoramentoRepository.findByAtivoTrue();
+			
+			for (Monitoramento monitoramento : monitoramentos) {
+				if (monitoramento.getPaciente().getCodigo() == codigo) {
+					monitoramentosStatus.add(monitoramento);
+				}
+			}
+			
+		}
+		
+		if (status == false) {
+			
+			monitoramentos = monitoramentoRepository.findByAtivoFalse();
+			
+			for (Monitoramento monitoramento : monitoramentos) {
+				if (monitoramento.getPaciente().getCodigo() == codigo) {
+					monitoramentosStatus.add(monitoramento);
+				}
+			}
+		}
+		
+//		for (Monitoramento monitoramento : monitoramentosStatus) {
+//			System.out.println(monitoramento.getDescricao());
+//		}
+		
+		return MonitoramentoDTO.converter(monitoramentosStatus);
 	}
 	
 	@GetMapping("{id}")
