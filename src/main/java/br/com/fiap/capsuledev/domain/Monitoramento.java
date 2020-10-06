@@ -59,22 +59,22 @@ public class Monitoramento {
 //    @JoinColumn(name = "cd_capsule_watch", nullable = false)
 //    private CapsuleWatch capsuleWatch;
     
-    @OneToMany(mappedBy="monitoramento", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="monitoramento", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     //Cascade? Not sure
     private List<CapsuleWatch> listaCapsuleWatch = new ArrayList<CapsuleWatch>();
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     //Costumava ser ALL
     @JoinColumn(name = "cd_medico", nullable = false)
     //@JsonBackReference não pode ficar :(
     private Medico medico;
     
-    @OneToMany(mappedBy="monitoramento", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="monitoramento", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     //Costumava ser cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH },
     @Valid
     private List<CapsuleControl> listaCapsuleControl = new ArrayList<CapsuleControl>();
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     //Costumava ser ALL
     @JoinColumn(name = "cd_paciente", nullable = false)
     private Paciente paciente;
