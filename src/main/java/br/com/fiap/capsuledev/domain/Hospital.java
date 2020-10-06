@@ -45,7 +45,7 @@ public class Hospital {
 	private String telefone;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy="hospital", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="hospital", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE }, fetch = FetchType.EAGER)
 	private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
 
 	public Hospital() {
