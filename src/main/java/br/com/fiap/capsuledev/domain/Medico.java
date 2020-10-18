@@ -40,7 +40,7 @@ public class Medico {
     private List<Monitoramento> monitoramentos = new ArrayList<Monitoramento>();
     
     public Medico() {
-	}
+    }
 
 	public Medico(String nome, String crm) {
         this.nome = nome;

@@ -9,10 +9,19 @@ INSERT INTO TB_MEDICO (cd_medico, nr_crm, nm_medico) VALUES (SQ_MEDICO.nextval, 
 INSERT INTO TB_MEDICO (cd_medico, nr_crm, nm_medico) VALUES (SQ_MEDICO.nextval, '777', 'Chucrute');
 
 INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nascimento, nm_paciente, nm_mae, ds_orgao, nr_rg, tl_telefone, dt_transplante) VALUES
- (SQ_PACIENTE.nextval, 'mamãe', 'grande rua', 'masculino', '1997-03-04', 'Thandy', 'Ana', 'pulmao', 'xx34', '9947474', '2020-03-04');
+ (SQ_PACIENTE.nextval, 'mãe', 'grande rua', 'masculino', '1999-03-04', 'Thandy', 'thandyMae', 'rim', 'xx34', '9947474', '2020-03-04');
  
  INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nascimento, nm_paciente, nm_mae, ds_orgao, nr_rg, tl_telefone, dt_transplante) VALUES
- (SQ_PACIENTE.nextval, 'mamãe', 'grande rua', 'masculino', '1999-03-04', 'Gui', 'guiMae', 'pé', 'xx34', '9947474', '2020-03-04');
+ (SQ_PACIENTE.nextval, 'mãe', 'grande rua', 'masculino', '1999-03-04', 'Gui', 'guiMae', 'rim', 'xx34', '9947474', '2020-03-04');
+ 
+  INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nascimento, nm_paciente, nm_mae, ds_orgao, nr_rg, tl_telefone, dt_transplante) VALUES
+ (SQ_PACIENTE.nextval, 'mãe', 'grande rua', 'feminino', '1999-03-04', 'Claudia', 'claudiaMae', 'rim', 'xx34', '9947474', '2020-03-04');
+ 
+   INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nascimento, nm_paciente, nm_mae, ds_orgao, nr_rg, tl_telefone, dt_transplante) VALUES
+ (SQ_PACIENTE.nextval, 'mãe', 'grande rua', 'masculino', '1999-03-04', 'Pedro', 'pedroMae', 'rim', 'xx34', '9947474', '2020-03-04');
+ 
+ INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nascimento, nm_paciente, nm_mae, ds_orgao, nr_rg, tl_telefone, dt_transplante) VALUES
+ (SQ_PACIENTE.nextval, 'mãe', 'grande rua', 'masculino', '1999-03-04', 'Rodrigo', 'rodrigoMae', 'rim', 'xx34', '9947474', '2020-03-04');
 
  INSERT INTO TB_MONITORAMENTO (cd_monitoramento, st_monitoramento, ds_monitoramento, dt_fim, nr_frequencia_segundos, dt_inicio, cd_hospital, cd_medico, cd_paciente) VALUES
  (SQ_MONITORAMENTO.nextval, false, 'primeiro monitoramento Thandy', '2021-08-04 21:58:00', 1000, '2010-02-02 21:58:41', 1, 1, 1);
