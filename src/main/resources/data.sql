@@ -6,13 +6,13 @@ INSERT INTO TB_HOSPITAL_CLINICA (cd_hospital_clinica, nm_hospital_clinica, nr_cn
   
 INSERT INTO TB_MEDICO (cd_medico, nr_crm, nm_medico) VALUES (SQ_MEDICO.nextval, '888', 'Hans');
 
-INSERT INTO TB_MEDICO (cd_medico, nr_crm, nm_medico) VALUES (SQ_MEDICO.nextval, '777', 'Chucrute');
+INSERT INTO TB_MEDICO (cd_medico, nr_crm, nm_medico) VALUES (SQ_MEDICO.nextval, '777', 'doc2');
 
 INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nascimento, nm_paciente, nm_mae, ds_orgao, nr_rg, tl_telefone, dt_transplante) VALUES
  (SQ_PACIENTE.nextval, 'mãe', 'grande rua', 'masculino', '1999-03-04', 'Thandy', 'thandyMae', 'rim', 'xx34', '9947474', '2020-03-04');
  
  INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nascimento, nm_paciente, nm_mae, ds_orgao, nr_rg, tl_telefone, dt_transplante) VALUES
- (SQ_PACIENTE.nextval, 'mãe', 'grande rua', 'masculino', '1999-03-04', 'Gui', 'guiMae', 'rim', 'xx34', '9947474', '2020-03-04');
+ (SQ_PACIENTE.nextval, 'mãe', 'grande rua', 'masculino', '1999-03-04', 'Guilherme', 'guiMae', 'rim', 'xx34', '9947474', '2020-03-04');
  
   INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nascimento, nm_paciente, nm_mae, ds_orgao, nr_rg, tl_telefone, dt_transplante) VALUES
  (SQ_PACIENTE.nextval, 'mãe', 'grande rua', 'feminino', '1999-03-04', 'Claudia', 'claudiaMae', 'rim', 'xx34', '9947474', '2020-03-04');
@@ -34,6 +34,15 @@ INSERT INTO TB_PACIENTE (cd_paciente, nm_contato, ds_endereco, ds_genero, dt_nas
  
   INSERT INTO TB_MONITORAMENTO (cd_monitoramento, st_monitoramento, ds_monitoramento, dt_fim, nr_frequencia_segundos, dt_inicio, cd_hospital, cd_medico, cd_paciente) VALUES
  (SQ_MONITORAMENTO.nextval, false, 'segundo monitoramento Gui', '2021-08-04 03:24:19', 4000, '2010-02-02 21:58:41', 1, 1, 2);
+ 
+ INSERT INTO TB_MONITORAMENTO (cd_monitoramento, st_monitoramento, ds_monitoramento, dt_fim, nr_frequencia_segundos, dt_inicio, cd_hospital, cd_medico, cd_paciente) VALUES
+ (SQ_MONITORAMENTO.nextval, false, 'primeiro monitoramento Claudia', '2021-08-04 03:24:19', 4000, '2010-02-02 21:58:41', 2, 2, 3);
+ 
+ INSERT INTO TB_MONITORAMENTO (cd_monitoramento, st_monitoramento, ds_monitoramento, dt_fim, nr_frequencia_segundos, dt_inicio, cd_hospital, cd_medico, cd_paciente) VALUES
+ (SQ_MONITORAMENTO.nextval, false, 'primeiro monitoramento Pedro', '2021-08-04 03:24:19', 4000, '2010-02-02 21:58:41', 2, 2, 4);
+ 
+ INSERT INTO TB_MONITORAMENTO (cd_monitoramento, st_monitoramento, ds_monitoramento, dt_fim, nr_frequencia_segundos, dt_inicio, cd_hospital, cd_medico, cd_paciente) VALUES
+ (SQ_MONITORAMENTO.nextval, false, 'primeiro monitoramento Rodrigo', '2021-08-04 03:24:19', 4000, '2010-02-02 21:58:41', 1, 2, 5);
 
  INSERT INTO TB_CAPSULE_WATCH (cd_capsule_watch, nr_batimento, dt_data_hora, nr_imc, nr_pressao, nr_temperatura, cd_monitoramento) VALUES
  (SQ_CAPSULE_WATCH.nextval, 4, '2021-08-04 11:53:00', 8.2, 11.1, 36.2, 1);
